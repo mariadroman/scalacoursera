@@ -23,7 +23,14 @@ object Lists {
    * @param xs A list of natural numbers
    * @return The sum of all elements in `xs`
    */
-    def sum(xs: List[Int]): Int = ???
+    def sum(xs: List[Int]): Int = {
+      @scala.annotation.tailrec
+      def go(l: List[Int], acc: Int): Int = {
+        if (l.isEmpty) acc
+        else go(l.tail, acc + l.head)
+      }
+      go(xs, 0)
+    }
   
   /**
    * This method returns the largest element in a list of integers. If the
@@ -38,5 +45,15 @@ object Lists {
    * @return The largest element in `xs`
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
-    def max(xs: List[Int]): Int = ???
+    def max(xs: List[Int]): Int = {
+      @scala.annotation.tailrec
+      def go(l: List[Int], max: Int): Int = {
+        if (l.isEmpty) max
+        else {
+          if (l.head > max) go(l.tail, l.head)
+          else go(l.tail, max)
+        }
+      }
+      go(xs, 0)
+    }
   }
